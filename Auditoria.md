@@ -21,3 +21,5 @@ Pero al tratar con informaion delicada, como lo es el estado o retiro de una cue
 - (5)
 Un ultimo factor que vi, es la definicion del tipo de cuenta, como <int tipoCuenta>, en donde se es 1 es una cuenta de ahorras, 2 si es corriente. Considero podria ser un fallo al momento de garantizar una escalabilidad del producto, ya que al momento de querer aumentar productos bancarios, se tendrian que redefinir los condicionales en los que se encuentra la variable.
 No es un problema tan tecnico, ya que para el programa corto de crear una cuenta - retirar, no es problema estimar solo 2 productos, solo era una observacion a una posible actualizacion del sistema. 
+
+Una forma de solucionarlo fue haciendo de las cuentas de ahorro y corrientes clases hijas de la clase <CuentaBancaria>, de este modo poder sobre escribir los metodos dependiendo de la cuenta, o futuro producto bancario. 
