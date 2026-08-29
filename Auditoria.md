@@ -23,3 +23,6 @@ Un ultimo factor que vi, es la definicion del tipo de cuenta, como <int tipoCuen
 No es un problema tan tecnico, ya que para el programa corto de crear una cuenta - retirar, no es problema estimar solo 2 productos, solo era una observacion a una posible actualizacion del sistema. 
 
 Una forma de solucionarlo fue haciendo de las cuentas de ahorro y corrientes clases hijas de la clase <CuentaBancaria>, de este modo poder sobre escribir los metodos dependiendo de la cuenta, o futuro producto bancario. 
+
+- (6)
+Un detalle màs mio, fue ajustar la salida por pantalla, para que de esta forma podemas ver que se creo correctamnte la cuenta, y despues de cierto movieinto de retiro ver en que estado queda la cuenta, y en el caso de cuenta corriente ver cuanto quedo yo debiendo. 
