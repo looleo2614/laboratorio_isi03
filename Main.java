@@ -46,9 +46,9 @@ abstract class CuentaBancaria{
     public abstract void comisionMensual();
 
     public void mostrarInfo(){
-        System.out.println("| Numero de cuenta: "+numeroCuenta);
-        System.out.println(" | Titular: "+titular);
-        System.out.printf(" | Saldo: $%.2f%n",saldo);
+        System.out.println("-> Numero de cuenta: "+numeroCuenta);
+        System.out.println("-> Titular: "+titular);
+        System.out.printf("-> Saldo: $%.2f%n",saldo);
     }
 
 }
@@ -79,7 +79,7 @@ class CuentaAhorros extends CuentaBancaria{
         }
         if (getSaldo()>=monto){
             setSaldo(getSaldo()-monto);
-            System.out.printf("- Retiro: &%.2f%n",monto);
+            System.out.printf("- Retiro: $%.2f%n",monto);
         } else {
             System.out.println("- Retiro: Rechazado, no se permiten sobregiros.");
         }
@@ -153,10 +153,10 @@ class CuentaCorriente extends CuentaBancaria{
         }
         if (getSaldo()+cupoSobregiro>=monto){
             setSaldo(getSaldo()-monto);
-            System.out.printf("- Retiro: &%.2f%n",monto);
-        }
-        if (getSaldo()<0){
+            System.out.printf("- Retiro: $%.2f%n",monto);
+            if (getSaldo()<0){
             System.out.printf("- La cuenta esta en sobregiro, saldo actual: $%.2f%n",getSaldo());
+            } 
         } else {
             System.out.println("- Retiro: Rechazado, excede el cupo de sobregiros.");
         }
@@ -173,7 +173,7 @@ class CuentaCorriente extends CuentaBancaria{
             return;
         }
         setSaldo(getSaldo()-monto);
-        System.out.printf("- Retiro: &%.2f%n",monto);
+        System.out.printf("- Retiro: $%.2f%n",monto);
         if (getSaldo()<0&&diasenSobregiro>0){
             double deuda=Math.abs(getSaldo());
             double interesMora=deuda*tasaMoraDiaria*diasenSobregiro;
@@ -216,11 +216,40 @@ class AuditorioBancaria implements AutoCloseable{
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println("| Sistema Bancario |");
+        System.out.println("////////// Sistema Bancario //////////");
+        System.out.println("- Cuenta Ahorros");
         CuentaAhorros ahorro=new CuentaAhorros("123456789","Looleo",1000000.0,0.02);
         ahorro.mostrarInfo();
+        System.out.println(" ");
+        System.out.println("-Depositar $200: ");
+        ahorro.depositar(200.0);
+        System.out.println("-Retirar $300: ");
+        ahorro.retirar(300.0);
+        System.out.println("-Retirar $2000: ");
+        ahorro.retirar(2000.0);
+        System.out.println("-Interes aplicado: ");
+        ahorro.aplicarInteres();
+        System.out.println("-Comision: ");
+        ahorro.comisionMensual();
+        System.out.println(" ");
+        ahorro.mostrarInfo();
+        System.out.println(" ");
+        System.out.println("----------------------------------------");
+        System.out.println(" ");
+        System.out.println("- Cuenta Corriente");
         CuentaCorriente corriente=new CuentaCorriente("987654321","Laura Leal",1200.0,600.0,20.0,0.01);
         corriente.mostrarInfo();
+        System.out.println(" ");
+        System.out.println("-Retiro $200: ");
+        corriente.retirar(200.0);
+        System.out.println("-REtiro con sobregiro: ");
+        corriente.retirar(1300.0);
+        System.out.println("-Exceso de sobregiro: ");
+        corriente.retirar(500.0);
+        System.out.println(" ");
+        corriente.mostrarInfo();
+
+        
     }
     
 }
